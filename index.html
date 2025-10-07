@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LightUp Book Club — Incredible</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">LUBC</div>
+      <div>
+        <h1>LightUp Book Club</h1>
+        <p class="tag">Read • Earn • Grow — privately & beautifully</p>
+      </div>
+    </div>
+    <nav>
+      <a href="#join">Join</a>
+      <a href="#reader">Reader</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-left">
+      <h2>Welcome to LightUp ✨</h2>
+      <p class="hero-lead">Upload a book privately, track your progress, answer fun quizzes, earn while reading — and share your final note with us on WhatsApp when you finish.</p>
+
+      <a class="cta" href="#join">Get started — Join now</a>
+    </div>
+    <div class="hero-right">
+      <div class="float-books">
+        <span>📖</span><span>📘</span><span>📙</span>
+      </div>
+      <div class="hero-card">
+        <h3>How it works</h3>
+        <ol>
+          <li>Sign up & get a short Member ID</li>
+          <li>Upload your book (stored privately in your browser)</li>
+          <li>Read, track progress, answer chapter quizzes</li>
+          <li>Finish the book → send a final note to WhatsApp</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN FORM -->
+  <section id="join" class="panel glass">
+    <h2>Join LightUp Book Club</h2>
+    <form id="joinForm" class="form">
+      <div class="row">
+        <label>Full name<input id="name" type="text" required placeholder="Jane Doe"></label>
+        <label>Phone number<input id="phone" type="tel" required placeholder="0701..."></label>
+      </div>
+
+      <div class="row">
+        <label>Book title they want to read<input id="bookTitle" type="text" required placeholder="(You can upload the actual book later)"></label>
+      </div>
+
+      <div class="row">
+        <label>Day of week
+          <select id="day" required>
+            <option value="">Choose day</option>
+            <option>Monday</option><option>Tuesday</option><option>Wednesday</option>
+            <option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option>
+          </select>
+        </label>
+
+        <label>Start date<input id="startDate" type="date" required></label>
+      </div>
+
+      <div class="row">
+        <label class="consent"><input id="consent" type="checkbox" required> I consent to share contact info (Member ID and final note) with LightUp.</label>
+      </div>
+
+      <div class="row">
+        <div class="member-id">Member ID: <span id="memberId">—</span></div>
+        <div class="buttons">
+          <button type="submit" id="joinBtn">Create account</button>
+          <button type="button" id="resetBtn" class="alt">Reset</button>
+        </div>
+      </div>
+
+      <p id="joinMsg" class="muted small"></p>
+    </form>
+
+    <div class="uploader">
+      <h3>Upload your book (private)</h3>
+      <p class="muted small">Upload a plain <code>.txt</code> file for best results. The file is stored only in your browser (private). For best quiz detection include "Chapter" headings.</p>
+      <input id="fileInput" type="file" accept=".txt,.md" />
+      <p id="fileMsg" class="muted small"></p>
+    </div>
+  </section>
+
+  <!-- READER -->
+  <section id="reader" class="panel">
+    <div class="reader-left glass">
+      <div class="reader-controls">
+        <h3 id="currentBookTitle">No book loaded</h3>
+        <div class="small muted">Chapters: <span id="chapterCount">0</span> • Progress: <span id="overallProgress">0%</span></div>
+        <div class="chapter-list" id="chapterList"></div>
+      </div>
+
+      <div class="reader-area">
+        <div class="chapter-header">
+          <h4 id="chapterTitle">—</h4>
+          <div class="chapter-actions">
+            <button id="markDoneBtn" class="small">Mark chapter done ✓</button>
+            <button id="takeQuizBtn" class="small alt">Take Quiz ✍️</button>
+          </div>
+        </div>
+
+        <div id="chapterText" class="chapter-text">Upload a book and choose a chapter to start reading.</div>
+
+        <div class="reader-footer">
+          <label>Progress in chapter:
+            <input id="chapterProgress" type="range" min="0" max="100" value="0" />
+          </label>
+          <div class="muted small">You can move the slider to simulate reading progress; progress saved automatically.</div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="reader-right glass">
+      <h3>Session</h3>
+      <div>
+        <strong>Member:</strong> <span id="sessionName">—</span><br>
+        <strong>ID:</strong> <span id="sessionId">—</span><br>
+        <strong>Start day / date:</strong> <span id="sessionDayDate">—</span><br>
+        <strong>Status:</strong> <span id="sessionStatus">Not started</span>
+      </div>
+
+      <hr />
+
+      <h4>Final step</h4>
+      <p class="muted small">When you finish the entire book you may send a final note to the club admin via WhatsApp. This message will not include the book or chapter text.</p>
+      <textarea id="finalNote" rows="4" placeholder="Write a short note about your experience (optional)"></textarea>
+      <button id="sendFinalBtn" class="full">Send final note via WhatsApp</button>
+      <p id="sendMsg" class="muted small"></p>
+    </aside>
+  </section>
+
+  <!-- QUIZ MODAL -->
+  <div id="quizModal" class="modal hidden">
+    <div class="modal-card">
+      <button class="modal-close" id="closeQuiz">✕</button>
+      <h3 id="quizTitle">Quiz</h3>
+      <div id="quizArea"></div>
+      <div class="quiz-actions">
+        <button id="submitQuiz" class="full">Submit Quiz</button>
+      </div>
+      <div id="quizResult" class="muted small"></div>
+    </div>
+  </div>
+
+  <section id="about" class="panel glass">
+    <h2>About & Privacy</h2>
+    <p>
+      LightUp keeps your uploaded book private. Your book file stays only in your browser (localStorage).
+      We never upload the book to servers. Quizzes are generated on-device from the text you upload.
+    </p>
+    <p class="muted small">Note: For long books localStorage may be insufficient on some browsers — if you plan to read a very large book, re-upload when switching devices or use smaller files.</p>
+  </section>
+
+  <footer class="footer">
+    © LightUp Book Club — Made with utmost love • UI shines ✨
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
